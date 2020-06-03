@@ -10,14 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let titleLabel = UILabel()
+    let button = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .cyan
+        
         setupView()
     }
     
     func setupView(){
-        let titleLabel = UILabel()
+        
         titleLabel.text = "First Screen"
         view.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +29,7 @@ class ViewController: UIViewController {
         titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         
-        let button = UIButton()
+        
         button.setTitle("SecondVC", for: .normal)
         view.addSubview(button)
         button.backgroundColor = .blue
@@ -38,6 +42,7 @@ class ViewController: UIViewController {
     
     @objc func openSecondVC(){
         let vc = SecondVC()
+        vc.abracadabraDelegate = self
         present(vc, animated: true, completion: nil)
     }
     
@@ -47,3 +52,13 @@ class ViewController: UIViewController {
 
 
 
+extension ViewController: TestDelegate {
+    func didClickedButton(text: String, color: UIColor) {
+        titleLabel.text = text
+        titleLabel.textColor = .white
+        view.backgroundColor = color
+        button.isHidden = true
+    }
+    
+    
+}
